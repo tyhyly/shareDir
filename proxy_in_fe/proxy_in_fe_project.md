@@ -157,7 +157,7 @@ const isTest = env === ‘testing’;
 const UC_BASE_URL = process.env.UC_BASE_URL || (
   isProd 
   ? '//passport.xxx.com' 
-  :  ( isTest ? 'https://test.xxx.com:9111' : ‘开发环境下用户登录的URL所在地址 http://192.168.1.1:8000’ )
+  :  ( isTest ? 'https://test.xxx.com:9111' : ‘开发环境下用户登录的URL所在地址 http://110.110.1.1:8000’ )
 );
 new webpack.DefinePlugin({
   'process.env.NODE_ENV': JSON.stringify(env),
@@ -172,7 +172,7 @@ new webpack.DefinePlugin({
 ```
 2、配置接口代理地址
 
- let proxyTargetForRc = process.env['FE_DEV_PROXY_RC'] || 'http://192.168.1.1:9110';
+ let proxyTargetForRc = process.env['FE_DEV_PROXY_RC'] || 'http://110.110.1.1:9110';
 devServer = {
   disableHostCheck: true,
   proxy: {
@@ -185,8 +185,8 @@ devServer = {
 }
 
 上述两种操作都可以在启动环境的时候方便的进行更改
-例： 代理后端到后端同学的机器192.168.1.1:9111
-控制台执行命令 UC_BASE_URL=‘http://192.168.1.1:8085'  FE_DEV_PROXY_RC='http://192.168.1.1:8085'  npm run dev
+例： 代理后端到后端同学的机器110.110.1.1:9111
+控制台执行命令 UC_BASE_URL=‘http://110.110.1.1:8085'  FE_DEV_PROXY_RC='http://110.110.1.1:8085'  npm run dev
 ```
 
 
