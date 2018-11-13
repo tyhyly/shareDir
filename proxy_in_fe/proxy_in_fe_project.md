@@ -1,5 +1,5 @@
 title: 前端代理实践
-speaker: 李建宇
+speaker: lory lee
 url: https://github.com/ksky521/nodeppt
 transition: kontext
 files: /js/demo.js,/css/global.css,/img/bg1.png
@@ -8,7 +8,7 @@ theme: light
 [slide]
 
 # 前端代理实践 {:.text-lg}
-## 演讲者：李建宇
+## 演讲者：lory lee
 
 [slide]
 # Table of Contents  {:.text-super}
@@ -112,13 +112,13 @@ devServer: {
        '/user_info': 'http://localhost:8099',
       
        '/api': {
-          target: 'http://test.linkdoc.com:8886',
+          target: 'http://test.xxx.com:8886',
           changeOrigin: true,// Set the option changeOrigin to true for name-based virtual hosted sites
           autoRewrite: true,//rewrites the location host/port on (301/302/307/308) redirects based on requested host/port. Default: false.
           secure: true,// true/false, if you want to verify the SSL Certs
           protocolRewrite: null,//rewrites the location protocol on (301/302/307/308) redirects to 'http' or 'https'. Default: null.
           auth: '',//Basic authentication i.e. 'user:password' to compute an Authorization header.
-          headers: {host: 'test.linkdoc.com', 'Content-Type': 'application/x-www-form-urlencoded'}, //add request headers
+          headers: {host: 'test.xxx.com', 'Content-Type': 'application/x-www-form-urlencoded'}, //add request headers
           ws: true // true/false:if you want to proxy websockets
         },
     }
@@ -131,7 +131,7 @@ devServer: {
 
 ```
 {
-  ”name”: “linkdoc-fe”,
+  ”name”: “xxx-fe”,
   "scripts": {
       "dev": "webpack-dev-server --hot --inline --host=0.0.0.0 --port=8106 --config build/webpack.client.config.js",
       "dist": "rimraf dist && npm run build",
@@ -156,8 +156,8 @@ const isTest = env === ‘testing’;
 1、 配置登录地址
 const UC_BASE_URL = process.env.UC_BASE_URL || (
   isProd 
-  ? '//passport.linkdoc.com' 
-  :  ( isTest ? 'https://test.linkdoc.com:9111' : ‘开发环境下用户登录的URL所在地址 http://192.168.1.213:9000’ )
+  ? '//passport.xxx.com' 
+  :  ( isTest ? 'https://test.xxx.com:9111' : ‘开发环境下用户登录的URL所在地址 http://192.168.1.1:8000’ )
 );
 new webpack.DefinePlugin({
   'process.env.NODE_ENV': JSON.stringify(env),
@@ -172,7 +172,7 @@ new webpack.DefinePlugin({
 ```
 2、配置接口代理地址
 
- let proxyTargetForRc = process.env['FE_DEV_PROXY_RC'] || 'http://192.168.1.213:9110';
+ let proxyTargetForRc = process.env['FE_DEV_PROXY_RC'] || 'http://192.168.1.1:9110';
 devServer = {
   disableHostCheck: true,
   proxy: {
@@ -185,8 +185,8 @@ devServer = {
 }
 
 上述两种操作都可以在启动环境的时候方便的进行更改
-例： 代理后端到后端同学的机器192.168.1.101:9111
-控制台执行命令 UC_BASE_URL=‘http://192.168.1.102:8085'  FE_DEV_PROXY_RC='http://192.168.1.102:8085'  npm run dev
+例： 代理后端到后端同学的机器192.168.1.1:9111
+控制台执行命令 UC_BASE_URL=‘http://192.168.1.1:8085'  FE_DEV_PROXY_RC='http://192.168.1.1:8085'  npm run dev
 ```
 
 
@@ -203,8 +203,8 @@ http {
    server {
       listen 9001
       location /back/ {
-            proxy_pass http://homesite213.dev.linkdoc.com;
-            proxy_set_header Host homesite213.dev.linkdoc.com;
+            proxy_pass http://homesite213.dev.xxx.com;
+            proxy_set_header Host homesite213.dev.xxx.com;
         }
        
       #add_header Access-Control-Allow-Origin: "*"
@@ -223,7 +223,7 @@ http {
       error_log logs/www.error.log info;
  
       location / {
-            proxy_pass http://loc.linkdoc.com:8109;
+            proxy_pass http://loc.xxx.com:8109;
             proxy_set_header Host $host;
             index  index.html index.htm;
         }
