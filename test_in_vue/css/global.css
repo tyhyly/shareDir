@@ -1,0 +1,52 @@
+.m-t-md {
+   margin-top: 20px;
+}
+
+.text-super {
+   font-size: 90px;
+}
+
+.text-lg {
+    font-size: 66px;
+    font-weight: 600;
+}
+
+.text-md {
+    font-size: 40px;
+}
+
+.text-sm {
+    font-size: 26px;
+}
+
+.color-red {
+    color: red;
+}
+
+.color-green {
+    color: green;
+}
+
+.color-black {
+   color: black;
+}
+
+.color-yellow {
+   color: yellow;
+}
+
+.text-left {
+   text-align: left;
+}
+
+.ol-fix + ol {
+   display: block;	
+}
+
+.padding-0 {
+   padding: 0;
+}
+
+.p-left + p {
+   text-align: left;
+}
